@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NaviG — Интернет для каждого</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FFF8F0;
+  --accent: #D95F2B;
+  --green: #2B8C5F;
+  --blue: #1A6FA8;
+  --text: #1E1A14;
+  --card: #ffffff;
+  --shadow: 0 4px 24px rgba(30,26,20,0.10);
+  --radius: 20px;
+  --font-size: 20px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Nunito',sans-serif;
+  font-size:var(--font-size);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+/* HEADER */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:#fff;
+  box-shadow:0 2px 16px rgba(0,0,0,0.10);
+  padding:0 20px;
+}
+.header-inner{
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;gap:12px;
+  flex-wrap:wrap;min-height:68px;padding:8px 0;
+}
+.logo{
+  font-size:1.7rem;font-weight:900;color:var(--accent);
+  text-decoration:none;display:flex;align-items:center;gap:8px;
+  white-space:nowrap;
+}
+.logo span{font-size:0.85rem;font-weight:600;color:#888;display:block;line-height:1;}
+nav{display:flex;flex-wrap:wrap;gap:4px;flex:1;}
+nav a{
+  padding:7px 12px;border-radius:10px;
+  font-size:0.82rem;font-weight:700;color:var(--text);
+  text-decoration:none;cursor:pointer;transition:all .2s;white-space:nowrap;
+}
+nav a:hover,nav a.active{background:var(--accent);color:#fff;}
+.header-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.btn-lang,.btn-font{
+  padding:8px 14px;border-radius:10px;border:2px solid var(--accent);
+  background:#fff;color:var(--accent);font-weight:700;font-size:0.85rem;
+  cursor:pointer;transition:all .2s;font-family:'Nunito',sans-serif;
+}
+.btn-lang:hover,.btn-font:hover{background:var(--accent);color:#fff;}
+/* MAIN */
+main{padding-top:80px;min-height:100vh;}
+.page-section{display:none;}
+.page-section.active{display:block;}
+.container{max-width:1100px;margin:0 auto;padding:40px 20px;}
+/* HERO */
+.hero{
+  background:linear-gradient(135deg,#FFF3E8 0%,#FDE8D8 100%);
+  padding:60px 20px;text-align:center;
+}
+.hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:var(--accent);margin-bottom:16px;}
+.hero p{font-size:1.25rem;color:#555;margin-bottom:32px;max-width:600px;margin-left:auto;margin-right:auto;}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 32px;border-radius:16px;font-size:1.05rem;font-weight:800;
+  cursor:pointer;text-decoration:none;transition:all .2s;border:none;
+  min-height:56px;font-family:'Nunito',sans-serif;
+}
+.btn-primary{background:var(--accent);color:#fff;}
+.btn-primary:hover{background:#b84d20;transform:translateY(-2px);box-shadow:0 8px 24px rgba(217,95,43,0.35);}
+.btn-secondary{background:#fff;color:var(--accent);border:3px solid var(--accent);}
+.btn-secondary:hover{background:var(--accent);color:#fff;transform:translateY(-2px);}
+.btn-green{background:var(--green);color:#fff;}
+.btn-green:hover{background:#226b49;transform:translateY(-2px);}
+/* SVG illustration */
+.hero-illustration{margin:40px auto 0;max-width:320px;}
+/* CARDS GRID */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px;margin-top:32px;}
+.card{
+  background:var(--card);border-radius:var(--radius);padding:28px;
+  box-shadow:var(--shadow);transition:all .2s;cursor:pointer;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,0.13);}
+.card-icon{font-size:2.2rem;margin-bottom:12px;}
+.card h3{font-size:1.1rem;font-weight:800;margin-bottom:8px;}
+.card p{font-size:0.95rem;color:#555;}
+/* SECTION HEADINGS */
+.section-title{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;margin-bottom:8px;color:var(--text);}
+.section-sub{font-size:1.05rem;color:#666;margin-bottom:32px;}
+/* HOW IT WORKS */
+.steps-row{display:flex;gap:24px;flex-wrap:wrap;margin-top:24px;}
+.step-card{
+  flex:1;min-width:200px;background:var(--card);border-radius:var(--radius);
+  padding:28px;box-shadow:var(--shadow);text-align:center;
+}
+.step-num{font-size:3rem;font-weight:900;color:var(--accent);line-height:1;}
+.step-card h3{font-size:1.1rem;font-weight:800;margin:12px 0 8px;}
+/* TESTIMONIALS */
+.testimonial-card{
+  background:var(--card);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);
+}
+.avatar{
+  width:60px;height:60px;border-radius:50%;background:var(--accent);
+  color:#fff;font-size:1.4rem;font-weight:900;
+  display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+}
+.testimonial-card p{font-style:italic;color:#444;margin-bottom:12px;}
+.testimonial-card strong{font-size:0.9rem;color:var(--accent);}
+/* EMERGENCY BLOCK */
+.emergency{
+  background:linear-gradient(135deg,#D95F2B,#b84d20);
+  border-radius:var(--radius);padding:32px;color:#fff;margin-top:40px;
+}
+.emergency h2{font-size:1.6rem;font-weight:900;margin-bottom:16px;}
+.emergency-phones{display:flex;gap:16px;flex-wrap:wrap;}
+.emergency-phone{
+  background:rgba(255,255,255,0.2);border-radius:12px;padding:14px 20px;
+  text-align:center;flex:1;min-width:150px;
+}
+.emergency-phone a{color:#fff;text-decoration:none;font-size:1.3rem;font-weight:900;}
+.emergency-phone span{display:block;font-size:0.85rem;opacity:0.85;}
+/* LESSONS / STEPS */
+.lesson-step{
+  background:var(--card);border-radius:16px;padding:24px;
+  box-shadow:var(--shadow);margin-bottom:16px;
+  display:flex;align-items:flex-start;gap:20px;
+}
+.lesson-step-num{
+  min-width:52px;height:52px;background:var(--accent);color:#fff;
+  border-radius:50%;font-size:1.4rem;font-weight:900;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.lesson-step-body h4{font-size:1.05rem;font-weight:800;margin-bottom:6px;}
+.lesson-step-body p{font-size:0.95rem;color:#555;}
+/* VIDEO PLACEHOLDER */
+.video-placeholder{
+  background:#e0e0e0;border-radius:16px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:220px;margin:24px 0;color:#888;cursor:pointer;
+  transition:background .2s;
+}
+.video-placeholder:hover{background:#ccc;}
+.video-play{font-size:3rem;margin-bottom:8px;}
+/* ALERT BOXES */
+.alert-red{
+  background:#fff0f0;border-left:6px solid #e53935;border-radius:12px;
+  padding:20px 24px;margin:20px 0;
+}
+.alert-red strong{color:#c62828;}
+.alert-green{
+  background:#f0fff4;border-left:6px solid var(--green);border-radius:12px;
+  padding:20px 24px;margin:20px 0;
+}
+.alert-green strong{color:var(--green);}
+.alert-blue{
+  background:#e8f4fd;border-left:6px solid var(--blue);border-radius:12px;
+  padding:20px 24px;margin:20px 0;
+}
+/* ACCORDION */
+.accordion-item{
+  background:var(--card);border-radius:14px;margin-bottom:12px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.07);overflow:hidden;
+}
+.accordion-header{
+  padding:20px 24px;font-weight:800;font-size:1.05rem;
+  cursor:pointer;display:flex;justify-content:space-between;align-items:center;
+  transition:background .2s;
+}
+.accordion-header:hover{background:#fef3ec;}
+.accordion-icon{font-size:1.3rem;transition:transform .3s;color:var(--accent);}
+.accordion-icon.open{transform:rotate(45deg);}
+.accordion-body{
+  max-height:0;overflow:hidden;transition:max-height .4s ease;
+  padding:0 24px;color:#444;font-size:0.95rem;line-height:1.7;
+}
+.accordion-body.open{max-height:600px;padding:0 24px 20px;}
+/* QUIZ */
+.quiz-question{
+  background:var(--card);border-radius:var(--radius);padding:28px;
+  box-shadow:var(--shadow);margin-bottom:24px;
+}
+.quiz-question h3{font-size:1.15rem;font-weight:800;margin-bottom:16px;}
+.quiz-options{display:flex;flex-direction:column;gap:10px;}
+.quiz-option{
+  padding:14px 20px;border-radius:12px;border:2.5px solid #ddd;
+  cursor:pointer;font-size:1rem;font-weight:600;transition:all .2s;
+  background:#fff;text-align:left;font-family:'Nunito',sans-serif;
+}
+.quiz-option:hover{border-color:var(--accent);background:#fef3ec;}
+.quiz-option.correct{background:#e8f9ef;border-color:var(--green);color:var(--green);}
+.quiz-option.wrong{background:#ffeaea;border-color:#e53935;color:#c62828;}
+/* DICTIONARY */
+.dict-alpha{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;}
+.dict-alpha button{
+  width:42px;height:42px;border-radius:10px;border:2px solid #ddd;
+  background:#fff;font-weight:800;cursor:pointer;font-size:1rem;
+  transition:all .2s;font-family:'Nunito',sans-serif;
+}
+.dict-alpha button:hover,.dict-alpha button.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.dict-search{
+  width:100%;padding:14px 20px;border-radius:14px;border:2.5px solid #ddd;
+  font-size:1rem;font-family:'Nunito',sans-serif;margin-bottom:24px;
+  outline:none;transition:border .2s;
+}
+.dict-search:focus{border-color:var(--accent);}
+.dict-term{
+  background:var(--card);border-radius:16px;padding:22px 26px;
+  box-shadow:var(--shadow);margin-bottom:14px;
+}
+.dict-term h3{font-size:1.1rem;font-weight:900;color:var(--accent);margin-bottom:6px;}
+.dict-term p{font-size:0.95rem;color:#444;margin-bottom:4px;}
+.dict-term .example{font-size:0.9rem;color:#888;font-style:italic;}
+/* SERVICE CARDS */
+.service-card{
+  background:var(--card);border-radius:var(--radius);padding:24px;
+  box-shadow:var(--shadow);
+}
+.service-card-header{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+.service-card-icon{font-size:2rem;}
+.service-card h3{font-size:1.1rem;font-weight:800;}
+.service-details{
+  max-height:0;overflow:hidden;transition:max-height .4s;
+}
+.service-details.open{max-height:1000px;}
+/* PROGRESS BAR */
+.progress-bar-wrap{
+  background:#eee;border-radius:100px;height:10px;margin:16px 0;overflow:hidden;
+}
+.progress-bar{
+  height:100%;border-radius:100px;background:var(--accent);
+  transition:width .5s ease;
+}
+/* LESSON COMPLETE */
+.lesson-complete{
+  background:linear-gradient(135deg,#2B8C5F,#1a6b46);
+  color:#fff;border-radius:var(--radius);padding:32px;text-align:center;
+  margin-top:32px;
+}
+.lesson-complete h2{font-size:1.8rem;font-weight:900;margin-bottom:12px;}
+.lesson-complete p{font-size:1.05rem;opacity:0.9;margin-bottom:24px;}
+/* PASSWORD GENERATOR */
+.pwd-box{
+  background:var(--card);border-radius:var(--radius);padding:28px;
+  box-shadow:var(--shadow);
+}
+.pwd-display{
+  background:#f5f5f5;border-radius:12px;padding:18px 24px;
+  font-size:1.4rem;font-weight:800;letter-spacing:2px;
+  text-align:center;margin:16px 0;word-break:break-all;
+}
+/* FORM */
+.form-group{margin-bottom:20px;}
+.form-group label{display:block;font-weight:700;margin-bottom:8px;}
+.form-group input,.form-group textarea{
+  width:100%;padding:14px 18px;border-radius:12px;
+  border:2.5px solid #ddd;font-family:'Nunito',sans-serif;
+  font-size:1rem;outline:none;transition:border .2s;
+}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--accent);}
+.form-group textarea{min-height:120px;resize:vertical;}
+.form-success{
+  background:#e8f9ef;border-radius:14px;padding:24px;text-align:center;
+  color:var(--green);font-weight:800;font-size:1.1rem;display:none;
+}
+/* SCROLL TO TOP */
+#scrollTop{
+  position:fixed;bottom:28px;right:28px;z-index:999;
+  width:56px;height:56px;border-radius:50%;background:var(--accent);
+  color:#fff;font-size:1.5rem;border:none;cursor:pointer;
+  box-shadow:0 4px 20px rgba(217,95,43,0.4);
+  display:none;align-items:center;justify-content:center;
+  transition:all .2s;font-family:'Nunito',sans-serif;
+}
+#scrollTop:hover{transform:scale(1.1);}
+/* FOOTER */
+footer{
+  background:#1E1A14;color:#ccc;padding:40px 20px;margin-top:60px;
+}
+.footer-inner{max-width:1100px;margin:0 auto;}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:32px;margin-bottom:32px;}
+.footer-col h4{color:#fff;font-weight:900;margin-bottom:14px;}
+.footer-col a{display:block;color:#aaa;text-decoration:none;margin-bottom:8px;cursor:pointer;}
+.footer-col a:hover{color:var(--accent);}
+.footer-bottom{border-top:1px solid #333;padding-top:20px;text-align:center;color:#666;font-size:0.9rem;}
+/* VIDEO CARDS GRID */
+.video-cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;margin-top:24px;}
+.video-card{background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+.video-card-thumb{
+  background:#e0e0e0;height:140px;display:flex;align-items:center;
+  justify-content:center;font-size:2.5rem;color:#aaa;cursor:pointer;
+}
+.video-card-body{padding:16px;}
+.video-card-body h4{font-size:1rem;font-weight:800;margin-bottom:6px;}
+.video-card-body span{font-size:0.85rem;color:#888;}
+/* DOWNLOAD BUTTONS */
+.download-btn{
+  display:flex;align-items:center;gap:14px;padding:18px 24px;
+  background:var(--card);border-radius:14px;box-shadow:var(--shadow);
+  margin-bottom:12px;cursor:pointer;transition:all .2s;text-decoration:none;
+  color:var(--text);
+}
+.download-btn:hover{transform:translateX(4px);border-left:4px solid var(--accent);}
+.download-btn-icon{font-size:1.8rem;}
+.download-btn-text strong{display:block;font-size:1rem;font-weight:800;}
+.download-btn-text span{font-size:0.85rem;color:#888;}
+/* CONTACT BLOCK */
+.contact-card{
+  background:var(--card);border-radius:var(--radius);padding:32px;
+  box-shadow:var(--shadow);text-align:center;
+}
+.contact-phone{font-size:2.2rem;font-weight:900;color:var(--accent);}
+.contact-phone a{color:var(--accent);text-decoration:none;}
+/* SECURITY CARDS */
+.security-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:20px;}
+.security-can{background:#f0fff4;border:2px solid var(--green);border-radius:14px;padding:20px;}
+.security-can h4{color:var(--green);}
+.security-cant{background:#fff0f0;border:2px solid #e53935;border-radius:14px;padding:20px;}
+.security-cant h4{color:#c62828;}
+/* SCHEME CARDS */
+.scheme-card{
+  background:var(--card);border-radius:var(--radius);padding:28px;
+  box-shadow:var(--shadow);border-left:6px solid var(--accent);margin-bottom:16px;
+}
+.scheme-card h3{font-size:1.1rem;font-weight:900;color:var(--accent);margin-bottom:10px;}
+/* INFOGRAPHIC */
+.infographic{
+  display:flex;align-items:center;justify-content:center;
+  flex-wrap:wrap;gap:8px;margin:24px 0;padding:24px;
+  background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);
+}
+.infra-node{
+  background:var(--accent);color:#fff;border-radius:14px;
+  padding:14px 18px;text-align:center;font-weight:800;font-size:0.9rem;
+}
+.infra-arrow{font-size:1.8rem;color:var(--accent);}
+/* TWO COLUMNS */
+.two-col{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;margin-top:24px;}
+/* TAB */
+.tab-group{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;}
+.tab-btn{
+  padding:10px 20px;border-radius:10px;border:2px solid #ddd;
+  background:#fff;cursor:pointer;font-weight:700;transition:all .2s;
+  font-family:'Nunito',sans-serif;font-size:0.95rem;
+}
+.tab-btn:hover,.tab-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{display:none;}
+  .mobile-menu-btn{display:flex;}
+  .hero h1{font-size:1.8rem;}
+  .steps-row{flex-direction:column;}
+  .cards-grid{grid-template-columns:1fr;}
+}
+.mobile-menu-btn{
+  display:none;background:none;border:none;font-size:1.5rem;
+  cursor:pointer;padding:8px;
+}
+@media(max-width:768px){
+  .mobile-menu-btn{display:flex;}
+  nav{position:fixed;top:68px;left:0;right:0;background:#fff;
+  padding:16px;box-shadow:0 8px 24px rgba(0,0,0,0.1);
+  flex-direction:column;z-index:999;}
+  nav.open{display:flex;}
+}
+.section-divider{height:1px;background:#eee;margin:40px 0;}
+/* HIGHLIGHT BOX */
+.highlight-box{
+  background:linear-gradient(135deg,#fff3e8,#fde8d8);
+  border-radius:var(--radius);padding:28px;
+  border:2px solid rgba(217,95,43,0.2);margin:24px 0;
+}
+.highlight-box h3{color:var(--accent);font-size:1.2rem;font-weight:900;margin-bottom:8px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="#" onclick="showPage('home')">
+      🧭 NaviG
+      <span data-ru="Интернет для каждого" data-kz="Барлығына Интернет">Интернет для каждого</span>
+    </a>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Меню">☰</button>
+    <nav id="mainNav">
+      <a href="#" onclick="showPage('home')" data-ru="🏠 Главная" data-kz="🏠 Басты">🏠 Главная</a>
+      <a href="#" onclick="showPage('internet')" data-ru="🌐 Интернет" data-kz="🌐 Интернет">🌐 Интернет</a>
+      <a href="#" onclick="showPage('egov')" data-ru="🏛 Госуслуги" data-kz="🏛 Мемқызметтер">🏛 Госуслуги</a>
+      <a href="#" onclick="showPage('kaspi')" data-ru="💳 Kaspi" data-kz="💳 Kaspi">💳 Kaspi</a>
+      <a href="#" onclick="showPage('messengers')" data-ru="📱 Мессенджеры" data-kz="📱 Мессенджерлер">📱 Мессенджеры</a>
+      <a href="#" onclick="showPage('security')" data-ru="🔒 Безопасность" data-kz="🔒 Қауіпсіздік">🔒 Безопасность</a>
+      <a href="#" onclick="showPage('dictionary')" data-ru="📖 Словарь" data-kz="📖 Сөздік">📖 Словарь</a>
+      <a href="#" onclick="showPage('help')" data-ru="❓ Помощь" data-kz="❓ Көмек">❓ Помощь</a>
+    </nav>
+    <div class="header-controls">
+      <button class="btn-lang" id="langBtn" onclick="toggleLang()">ҚАЗ</button>
+      <button class="btn-font" onclick="changeFont(2)">+A</button>
+      <button class="btn-font" onclick="changeFont(-2)">−A</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== PAGE 1: HOME ===== -->
+<section class="page-section active" id="page-home">
+  <div class="hero">
+    <h1 data-ru="Добро пожаловать в мир интернета! 👋" data-kz="Интернет әлеміне қош келдіңіз! 👋">Добро пожаловать в мир интернета! 👋</h1>
+    <p data-ru="Простые уроки для тех, кто только начинает. Шаг за шагом, без спешки." data-kz="Жаңа бастаушыларға арналған қарапайым сабақтар. Асықпай, қадамба-қадам.">Простые уроки для тех, кто только начинает. Шаг за шагом, без спешки.</p>
+    <div class="hero-btns">
+      <button class="btn btn-primary" onclick="showPage('internet')">▶ Начать обучение</button>
+      <a class="btn btn-secondary" href="tel:88001234567">📞 Позвонить нам</a>
+    </div>
+    <div class="hero-illustration">
+      <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="160" cy="200" rx="120" ry="18" fill="#f0e0d0"/>
+        <!-- desk -->
+        <rect x="60" y="150" width="200" height="12" rx="6" fill="#c8a882"/>
+        <rect x="80" y="162" width="10" height="38" rx="4" fill="#b8946e"/>
+        <rect x="230" y="162" width="10" height="38" rx="4" fill="#b8946e"/>
+        <!-- monitor -->
+        <rect x="90" y="90" width="140" height="60" rx="10" fill="#2B8C5F"/>
+        <rect x="95" y="95" width="130" height="50" rx="8" fill="#e8f9ef"/>
+        <text x="160" y="126" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#2B8C5F" font-weight="bold">NaviG 🌐</text>
+        <rect x="145" y="150" width="30" height="10" rx="3" fill="#b8946e"/>
+        <!-- person -->
+        <circle cx="80" cy="80" r="22" fill="#F5C18A"/>
+        <!-- hair -->
+        <path d="M58 72 Q80 50 102 72" fill="#8B6347" opacity="0.7"/>
+        <!-- glasses -->
+        <rect x="63" y="76" width="14" height="9" rx="4" fill="none" stroke="#555" stroke-width="2"/>
+        <rect x="83" y="76" width="14" height="9" rx="4" fill="none" stroke="#555" stroke-width="2"/>
+        <line x1="77" y1="80" x2="83" y2="80" stroke="#555" stroke-width="2"/>
+        <!-- smile -->
+        <path d="M72 89 Q80 95 88 89" fill="none" stroke="#c87060" stroke-width="2"/>
+        <!-- body -->
+        <rect x="58" y="102" width="44" height="50" rx="12" fill="#1A6FA8"/>
+        <!-- arms -->
+        <path d="M58 115 Q40 120 50 140" stroke="#F5C18A" stroke-width="8" fill="none" stroke-linecap="round"/>
+        <path d="M102 115 Q115 120 105 140" stroke="#F5C18A" stroke-width="8" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2 class="section-title" data-ru="Что вы научитесь делать" data-kz="Нені үйренесіз">Что вы научитесь делать</h2>
+    <p class="section-sub" data-ru="Простые и полезные навыки для современной жизни" data-kz="Заманауи өмір үшін қарапайым және пайдалы дағдылар">Простые и полезные навыки для современной жизни</p>
+    <div class="cards-grid">
+      <div class="card" onclick="showPage('internet')">
+        <div class="card-icon">🌐</div>
+        <h3 data-ru="Пользоваться интернетом" data-kz="Интернетті пайдалану">Пользоваться интернетом</h3>
+        <p data-ru="Браузер, поиск, электронная почта" data-kz="Браузер, іздеу, электрондық пошта">Браузер, поиск, электронная почта</p>
+      </div>
+      <div class="card" onclick="showPage('egov')">
+        <div class="card-icon">🏛</div>
+        <h3 data-ru="Оформлять госуслуги" data-kz="Мемлекеттік қызметтерді ресімдеу">Оформлять госуслуги</h3>
+        <p data-ru="eGov.kz без очередей и суеты" data-kz="Кезексіз eGov.kz">eGov.kz без очередей и суеты</p>
+      </div>
+      <div class="card" onclick="showPage('kaspi')">
+        <div class="card-icon">💳</div>
+        <h3 data-ru="Платить через Kaspi" data-kz="Kaspi арқылы төлеу">Платить через Kaspi</h3>
+        <p data-ru="Коммунальные, переводы, покупки" data-kz="Коммуналдық, аударымдар, сатып алу">Коммунальные, переводы, покупки</p>
+      </div>
+      <div class="card" onclick="showPage('messengers')">
+        <div class="card-icon">📱</div>
+        <h3 data-ru="Писать в WhatsApp" data-kz="WhatsApp-та жазу">Писать в WhatsApp</h3>
+        <p data-ru="Общаться с семьёй и друзьями" data-kz="Отбасы мен достарымен байланысу">Общаться с семьёй и друзьями</p>
+      </div>
+      <div class="card" onclick="showPage('security')">
+        <div class="card-icon">🔒</div>
+        <h3 data-ru="Защищаться от мошенников" data-kz="Алаяқтардан қорғану">Защищаться от мошенников</h3>
+        <p data-ru="Безопасность в интернете" data-kz="Интернеттегі қауіпсіздік">Безопасность в интернете</p>
+      </div>
+      <div class="card" onclick="showPage('internet')">
+        <div class="card-icon">📧</div>
+        <h3 data-ru="Пользоваться почтой" data-kz="Поштаны пайдалану">Пользоваться почтой</h3>
+        <p data-ru="Gmail — просто и удобно" data-kz="Gmail — қарапайым және ыңғайлы">Gmail — просто и удобно</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 class="section-title">Как это работает</h2>
+    <p class="section-sub">Три простых шага к уверенному использованию интернета</p>
+    <div class="steps-row">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Выберите тему</h3>
+        <p>Нажмите на раздел, который вас интересует — интернет, Kaspi, госуслуги...</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Читайте инструкции</h3>
+        <p>Пошаговые уроки с большими буквами и понятными картинками</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Практикуйтесь</h3>
+        <p>Пробуйте сами и задавайте вопросы — мы всегда поможем!</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 class="section-title">Отзывы наших учеников</h2>
+    <div class="cards-grid">
+      <div class="testimonial-card">
+        <div class="avatar">АМ</div>
+        <p>«Теперь сама оплачиваю коммунальные через Kaspi! Дочка помогла один раз, а потом я всё делаю сама.»</p>
+        <strong>— Апа Марзия, 67 лет, Алматы</strong>
+      </div>
+      <div class="testimonial-card">
+        <div class="avatar">КБ</div>
+        <p>«Научился получать справки через eGov. Больше не стою в очередях 3 часа. Огромное спасибо NaviG!»</p>
+        <strong>— Кайрат Бахытов, 71 год, Астана</strong>
+      </div>
+      <div class="testimonial-card">
+        <div class="avatar">НС</div>
+        <p>«Теперь общаюсь с внуками через WhatsApp каждый день. Даже видеозвонки делаю! Это настоящее чудо.»</p>
+        <strong>— Нурия Сейтқали, 63 года, Шымкент</strong>
+      </div>
+    </div>
+
+    <div class="emergency">
+      <h2>📞 Экстренные и горячие линии</h2>
+      <div class="emergency-phones">
+        <div class="emergency-phone">
+          <a href="tel:1414">1414</a>
+          <span>eGov горячая линия</span>
+        </div>
+        <div class="emergency-phone">
+          <a href="tel:88007779977">8800 777-99-77</a>
+          <span>Kaspi Банк</span>
+        </div>
+        <div class="emergency-phone">
+          <a href="tel:102">102</a>
+          <span>Полиция</span>
+        </div>
+        <div class="emergency-phone">
+          <a href="tel:103">103</a>
+          <span>Скорая помощь</span>
+        </div>
+        <div class="emergency-phone">
+          <a href="tel:109">109</a>
+          <span>Антикоррупция</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 2: INTERNET ===== -->
+<section class="page-section" id="page-internet">
+  <div class="container">
+    <h1 class="section-title">🌐 Основы интернета</h1>
+    <p class="section-sub">Узнайте, что такое интернет, как им пользоваться и как писать письма</p>
+
+    <div class="highlight-box">
+      <h3>💡 Что такое интернет?</h3>
+      <p>Интернет — это как <strong>огромная библиотека</strong>, где хранятся миллиарды книг, газет, видео и музыки. Только вместо полок — специальные компьютеры по всему миру. Вы можете «зайти» в эту библиотеку прямо из дома!</p>
+    </div>
+
+    <div class="infographic">
+      <div class="infra-node">📱 Ваш телефон</div>
+      <div class="infra-arrow">→</div>
+      <div class="infra-node">📡 Wi-Fi роутер</div>
+      <div class="infra-arrow">→</div>
+      <div class="infra-node">🌐 Интернет</div>
+      <div class="infra-arrow">→</div>
+      <div class="infra-node">🏛 Сайт</div>
+    </div>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" style="font-size:1.8rem;">📱 Устройства для интернета</h2>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon">📱</div>
+        <h3>Смартфон</h3>
+        <p>✅ Всегда под рукой<br>✅ Удобно для WhatsApp<br>⚠️ Экран небольшой</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📟</div>
+        <h3>Планшет</h3>
+        <p>✅ Большой экран<br>✅ Удобно читать<br>⚠️ Тяжелее смартфона</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💻</div>
+        <h3>Компьютер</h3>
+        <p>✅ Клавиатура — легко печатать<br>✅ Большой экран<br>⚠️ Нельзя взять с собой</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" style="font-size:1.8rem;">🔍 Браузер — как открыть сайт</h2>
+    <p class="section-sub">Браузер — это программа для просмотра сайтов. Как дверь в интернет.</p>
+
+    <div id="browserProgress" style="display:none;">
+      <div class="progress-bar-wrap"><div class="progress-bar" id="lessonBar" style="width:0%"></div></div>
+    </div>
+
+    <div class="lesson-step">
+      <div class="lesson-step-num">1</div>
+      <div class="lesson-step-body">
+        <h4>🔎 Найдите иконку браузера</h4>
+        <p>На вашем телефоне найдите иконку <strong>Chrome</strong> (разноцветный круг), <strong>Safari</strong> (компас) или <strong>Яндекс</strong> браузер</p>
+      </div>
+    </div>
+    <div class="lesson-step">
+      <div class="lesson-step-num">2</div>
+      <div class="lesson-step-body">
+        <h4>👆 Нажмите на иконку</h4>
+        <p>Один раз нажмите пальцем на иконку браузера — он откроется</p>
+      </div>
+    </div>
+    <div class="lesson-step">
+      <div class="lesson-step-num">3</div>
+      <div class="lesson-step-body">
+        <h4>📝 Найдите адресную строку</h4>
+        <p>Вверху экрана есть длинная белая полоска — это адресная строка. Нажмите на неё</p>
+      </div>
+    </div>
+    <div class="lesson-step">
+      <div class="lesson-step-num">4</div>
+      <div class="lesson-step-body">
+        <h4>⌨️ Введите адрес сайта</h4>
+        <p>Напишите адрес, например <strong>google.com</strong> или <strong>egov.kz</strong> и нажмите кнопку «Перейти» на клавиатуре</p>
+      </div>
+    </div>
+    <div class="lesson-step">
+      <div class="lesson-step-num">5</div>
+      <div class="lesson-step-body">
+        <h4>🎉 Сайт открылся!</h4>
+        <p>Поздравляем! Вы зашли на сайт. Теперь можно читать, смотреть или искать нужное</p>
+      </div>
+    </div>
+
+    <div class="video-placeholder">
+      <div class="video-play">▶</div>
+      <strong>Видеоурок: Как пользоваться браузером</strong>
+      <span style="font-size:0.9rem;color:#aaa;margin-top:4px;">5 минут</span>
+    </div>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" style="font-size:1.8rem;">📬 Электронная почта Gmail</h2>
+
+    <div class="alert-blue">
+      <strong>ℹ️ Зачем нужна почта?</strong> Email нужен для регистрации на сайтах, получения документов и общения. Создать почту на Gmail — бесплатно!
+    </div>
+
+    <div class="lesson-step"><div class="lesson-step-num">1</div><div class="lesson-step-body"><h4>Откройте браузер и зайдите на gmail.com</h4><p>Введите в адресной строке: <strong>gmail.com</strong></p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">2</div><div class="lesson-step-body"><h4>Нажмите «Создать аккаунт»</h4><p>Внизу страницы найдите синюю кнопку</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">3</div><div class="lesson-step-body"><h4>Введите имя и фамилию</h4><p>Напишите своё имя — так вас будут видеть другие</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">4</div><div class="lesson-step-body"><h4>Придумайте адрес почты</h4><p>Например: <strong>maria.seitkali@gmail.com</strong></p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">5</div><div class="lesson-step-body"><h4>Придумайте пароль</h4><p>Минимум 8 символов. Запишите его в блокнот!</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">6</div><div class="lesson-step-body"><h4>Укажите номер телефона</h4><p>Google отправит код подтверждения по SMS</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">7</div><div class="lesson-step-body"><h4>Введите код из SMS</h4><p>Вам придёт сообщение с 6-значным кодом — введите его</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">8</div><div class="lesson-step-body"><h4>Заполните дату рождения</h4><p>Обязательное поле при регистрации</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">9</div><div class="lesson-step-body"><h4>Примите условия использования</h4><p>Прокрутите вниз и нажмите «Принять»</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">10</div><div class="lesson-step-body"><h4>🎉 Готово! Ваша почта создана</h4><p>Теперь у вас есть личный почтовый ящик в интернете!</p></div></div>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" style="font-size:1.8rem;">✅ Мини-тест: Проверь себя</h2>
+    <div id="quizInternet"></div>
+    <button class="btn btn-primary" onclick="checkQuiz('internet')" style="margin-top:16px;">Проверить ответы</button>
+    <div id="quizResultInternet" style="margin-top:16px;font-weight:800;font-size:1.1rem;"></div>
+
+    <div class="lesson-complete">
+      <h2>🎉 Молодец! Вы завершили урок</h2>
+      <p>Теперь вы знаете основы интернета, браузера и электронной почты!</p>
+      <button class="btn btn-secondary" onclick="showPage('egov')">Следующий урок: Госуслуги →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 3: EGOV ===== -->
+<section class="page-section" id="page-egov">
+  <div class="container">
+    <h1 class="section-title">🏛 Государственные услуги — eGov</h1>
+    <p class="section-sub">Получайте справки и документы, не выходя из дома!</p>
+
+    <div class="highlight-box">
+      <h3>🎉 Через интернет можно НЕ СТОЯТЬ В ОЧЕРЕДЯХ!</h3>
+      <p>Сотни государственных услуг доступны онлайн через <strong>egov.kz</strong> — официальный портал электронного правительства Казахстана. Это бесплатно и безопасно!</p>
+    </div>
+
+    <div class="alert-blue">
+      <strong>📌 ЭЦП (Электронная цифровая подпись)</strong> — это как ваша обычная подпись, только в электронном виде. Нужна для некоторых услуг. Получить можно бесплатно в ЦОНе. Но многие услуги доступны и без ЭЦП!
+    </div>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" style="font-size:1.8rem;">📋 Регистрация на eGov.kz</h2>
+
+    <div class="tab-group">
+      <button class="tab-btn active" onclick="switchTab('egov', 'noedp')">Без ЭЦП (проще)</button>
+      <button class="tab-btn" onclick="switchTab('egov', 'edp')">С ЭЦП</button>
+    </div>
+    <div class="tab-content active" id="egov-tab-noedp">
+      <div class="lesson-step"><div class="lesson-step-num">1</div><div class="lesson-step-body"><h4>Откройте сайт egov.kz</h4><p>Введите в браузере адрес: <strong>egov.kz</strong></p></div></div>
+      <div class="lesson-step"><div class="lesson-step-num">2</div><div class="lesson-step-body"><h4>Нажмите «Войти»</h4><p>Кнопка в правом верхнем углу сайта</p></div></div>
+      <div class="lesson-step"><div class="lesson-step-num">3</div><div class="lesson-step-body"><h4>Выберите «По номеру телефона»</h4><p>Это самый простой способ без ЭЦП</p></div></div>
+      <div class="lesson-step"><div class="lesson-step-num">4</div><div class="lesson-step-body"><h4>Введите номер телефона</h4><p>Тот номер, что привязан к вашему ИИН</p></div></div>
+      <div class="lesson-step"><div class="lesson-step-num">5</div><div class="lesson-step-body"><h4>Введите код из SMS</h4><p>Придёт автоматически за несколько секунд</p></div></div>
+      <div class="lesson-step"><div class="lesson-step-num">6</div><div class="lesson-step-body"><h4>🎉 Вы вошли в личный кабинет!</h4><p>Теперь можно заказывать услуги</p></div></div>
+    </div>
+    <div class="tab-content" id="egov-tab-edp">
+      <div class="lesson-step"><div class="lesson-step-num">1</div><div class="lesson-step-body"><h4>Получите ЭЦП в ЦОНе</h4><p>Обратитесь в любой ЦОН с удостоверением личности — это бесплатно</p></div></div>
+      <div class="lesson-step"><div class="lesson-step-num">2</div><div class="lesson-step-body"><h4>Установите NCA Layer</h4><p>Специальная программа для использования ЭЦП в браузере</p></div></div>
+      <div class="lesson-step"><div class="lesson-step-num">3</div><div class="lesson-step-body"><h4>Войдите через ЭЦП</h4><p>На egov.kz выберите «Войти с ЭЦП» и выберите ваш файл ключа</p></div></div>
+    </div>
+
+    <div class="video-placeholder">
+      <div class="video-play">▶</div>
+      <strong>Видеоурок: Регистрация на eGov</strong>
+      <span style="font-size:0.9rem;color:#aaa;margin-top:4px;">7 минут</span>
+    </div>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" style="font-size:1.8rem;">🗂 Популярные услуги</h2>
+    <div class="cards-grid" id="egovServices"></div>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" style="font-size:1.8rem;">❓ Частые проблемы</h2>
+    <div id="egovFaq"></div>
+
+    <div class="lesson-complete">
+      <h2>🎉 Отлично! Урок по eGov пройден</h2>
+      <p>Теперь вы можете получать государственные услуги онлайн!</p>
+      <button class="btn btn-secondary" onclick="showPage('kaspi')">Следующий урок: Kaspi →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 4: KASPI ===== -->
+<section class="page-section" id="page-kaspi">
+  <div class="container">
+    <h1 class="section-title">💳 Kaspi Bank</h1>
+    <p class="section-sub">Банк, магазин и платёжная система в одном приложении</p>
+
+    <div class="highlight-box">
+      <h3>✅ Kaspi — это БЕЗОПАСНО, если знать правила!</h3>
+      <p>Kaspi Bank — один из самых популярных банков Казахстана. Миллионы казахстанцев каждый день оплачивают коммунальные, переводят деньги и делают покупки через Kaspi.</p>
+    </div>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" style="font-size:1.8rem;">📲 Установка приложения</h2>
+    <div class="tab-group">
+      <button class="tab-btn active" onclick="switchTab('kaspi','android')">Android</button>
+      <button class="tab-btn" onclick="switchTab('kaspi','iphone')">iPhone (iOS)</button>
+    </div>
+    <div class="tab-content active" id="kaspi-tab-android">
+      <div class="lesson-step"><div class="lesson-step-num">1</div><div class="lesson-step-body"><h4>Откройте Google Play</h4><p>Найдите иконку Google Play на вашем телефоне (разноцветный треугольник)</p></div></div>
+      <div class="lesson-step"><div class="lesson-step-num">2</div><div class="lesson-step-body"><h4>Найдите «Kaspi.kz»</h4><p>Напишите в поиске <strong>Kaspi</strong> и выберите официальное приложение с жёлтым логотипом</p></div></div>
+      <div class="lesson-step"><div class="lesson-step-num">3</div><div class="lesson-step-body"><h4>Нажмите «Установить»</h4><p>Зелёная кнопка. Дождитесь завершения загрузки</p></div></div>
+      <div class="lesson-step"><div class="lesson-step-num">4</div><div class="lesson-step-body"><h4>Откройте приложение</h4><p>Нажмите «Открыть» или найдите иконку Kaspi на главном экране</p></div></div>
+    </div>
+    <div class="tab-content" id="kaspi-tab-iphone">
+      <div class="lesson-step"><div class="lesson-step-num">1</div><div class="lesson-step-body"><h4>Откройте App Store</h4><p>Синяя иконка с буквой «A» на вашем iPhone</p></div></div>
+      <div class="lesson-step"><div class="lesson-step-num">2</div><div class="lesson-step-body"><h4>Найдите «Kaspi.kz»</h4><p>В строке поиска напишите Kaspi</p></div></div>
+      <div class="lesson-step"><div class="lesson-step-num">3</div><div class="lesson-step-body"><h4>Нажмите «Загрузить»</h4><p>Может потребоваться подтверждение Apple ID паролем</p></div></div>
+    </div>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" style="font-size:1.8rem;">🗂 Что умеет Kaspi</h2>
+    <div class="cards-grid" id="kaspiFunctions"></div>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" style="font-size:1.8rem;">🏠 Оплата коммунальных услуг</h2>
+    <p class="section-sub">Подробная инструкция шаг за шагом</p>
+
+    <div class="lesson-step"><div class="lesson-step-num">1</div><div class="lesson-step-body"><h4>Откройте приложение Kaspi</h4><p>Нажмите на жёлтую иконку на телефоне</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">2</div><div class="lesson-step-body"><h4>Введите PIN-код или используйте отпечаток</h4><p>4-значный код или нажмите пальцем на сканер</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">3</div><div class="lesson-step-body"><h4>Выберите раздел «Платежи»</h4><p>Внизу экрана есть кнопка «Платежи» — нажмите на неё</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">4</div><div class="lesson-step-body"><h4>Выберите «Коммунальные услуги»</h4><p>Список категорий: свет, газ, вода, интернет...</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">5</div><div class="lesson-step-body"><h4>Выберите поставщика</h4><p>Например: «Алматыэнергосбыт» для электроэнергии</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">6</div><div class="lesson-step-body"><h4>Введите номер лицевого счёта</h4><p>Найдите в квитанции — обычно 10-12 цифр</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">7</div><div class="lesson-step-body"><h4>Нажмите «Далее»</h4><p>Система найдёт вашу квитанцию автоматически</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">8</div><div class="lesson-step-body"><h4>Проверьте сумму к оплате</h4><p>Убедитесь, что сумма правильная</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">9</div><div class="lesson-step-body"><h4>Выберите карту для оплаты</h4><p>Если у вас несколько карт — выберите нужную</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">10</div><div class="lesson-step-body"><h4>Нажмите «Оплатить»</h4><p>Подтвердите операцию PIN-кодом</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">11</div><div class="lesson-step-body"><h4>Дождитесь подтверждения</h4><p>Появится зелёная галочка — платёж прошёл!</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">12</div><div class="lesson-step-body"><h4>🎉 Готово! Квитанция сохранена</h4><p>Чек доступен в разделе «История операций»</p></div></div>
+
+    <div class="section-divider"></div>
+    <div class="alert-red">
+      <p>⚠️ <strong>ОСТОРОЖНО! МОШЕННИКИ!</strong></p>
+      <p style="margin-top:10px;font-size:1.05rem;color:#c62828;font-weight:900;">🚫 НИКОГДА не называйте код из SMS никому — даже «сотрудникам банка»!</p>
+      <p style="margin-top:8px;">Kaspi Bank <strong>никогда</strong> не звонит и не просит назвать CVV-код карты, пароль или код из SMS.</p>
+    </div>
+
+    <h2 class="section-title" style="font-size:1.8rem;margin-top:32px;">🚨 Схемы мошенничества в Kaspi</h2>
+    <div class="scheme-card">
+      <h3>📞 «Сотрудник банка» по телефону</h3>
+      <p>Звонят и говорят: «Ваша карта заблокирована, назовите код из SMS». <strong>Это мошенники!</strong> Настоящие сотрудники Kaspi никогда не просят коды.</p>
+    </div>
+    <div class="scheme-card">
+      <h3>🎁 «Вы выиграли приз»</h3>
+      <p>Пишут в WhatsApp: «Вы выиграли 50 000 тенге! Переведите 500 тенге для получения». <strong>Никакого приза нет!</strong></p>
+    </div>
+    <div class="scheme-card">
+      <h3>🛒 Продавец просит предоплату</h3>
+      <p>На OLX или другом сайте продавец просит перевести деньги вперёд. Товар не приходит. <strong>Переводите только при получении товара!</strong></p>
+    </div>
+
+    <div style="margin-top:24px;background:#fff;border-radius:16px;padding:24px;box-shadow:var(--shadow);">
+      <h3 style="font-weight:900;margin-bottom:12px;">Если вас обманули — звоните:</h3>
+      <p>📞 <a href="tel:88007779977" style="color:var(--accent);font-weight:900;font-size:1.2rem;">8800 777-99-77</a> — Kaspi Банк (бесплатно, круглосуточно)</p>
+      <p style="margin-top:8px;">📞 <a href="tel:102" style="color:var(--accent);font-weight:900;font-size:1.2rem;">102</a> — Полиция</p>
+    </div>
+
+    <div class="lesson-complete">
+      <h2>🎉 Урок по Kaspi завершён!</h2>
+      <p>Теперь вы умеете платить через Kaspi и знаете, как защититься от мошенников.</p>
+      <button class="btn btn-secondary" onclick="showPage('messengers')">Следующий урок: Мессенджеры →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 5: MESSENGERS ===== -->
+<section class="page-section" id="page-messengers">
+  <div class="container">
+    <h1 class="section-title">📱 Мессенджеры и соцсети</h1>
+    <p class="section-sub">Общайтесь с семьёй и друзьями бесплатно через интернет</p>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" style="font-size:1.8rem;">💬 WhatsApp — полный курс</h2>
+
+    <div class="alert-green">
+      <strong>✅ WhatsApp — бесплатные звонки и сообщения!</strong> Через Wi-Fi или интернет звоните детям, внукам и друзьям совершенно бесплатно, даже за рубеж!
+    </div>
+
+    <div class="lesson-step"><div class="lesson-step-num">1</div><div class="lesson-step-body"><h4>Установите WhatsApp</h4><p>Google Play (Android) или App Store (iPhone) → найдите WhatsApp → нажмите «Установить»</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">2</div><div class="lesson-step-body"><h4>Откройте приложение</h4><p>Зелёная иконка с телефоном на вашем телефоне</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">3</div><div class="lesson-step-body"><h4>Введите номер телефона</h4><p>Ваш казахстанский номер +7...</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">4</div><div class="lesson-step-body"><h4>Введите код из SMS</h4><p>6-значный код подтверждения придёт на ваш телефон</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">5</div><div class="lesson-step-body"><h4>Введите имя</h4><p>Как вас будут видеть ваши знакомые</p></div></div>
+
+    <div class="section-divider"></div>
+    <h2 style="font-size:1.3rem;font-weight:900;margin-bottom:16px;">📨 Как написать сообщение</h2>
+    <div class="lesson-step"><div class="lesson-step-num">1</div><div class="lesson-step-body"><h4>Нажмите на значок 💬 (новый чат)</h4><p>В правом нижнем углу экрана</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">2</div><div class="lesson-step-body"><h4>Выберите контакт из списка</h4><p>Найдите имя человека, которому хотите написать</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">3</div><div class="lesson-step-body"><h4>Напишите сообщение</h4><p>Нажмите на поле снизу и напишите текст</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">4</div><div class="lesson-step-body"><h4>Нажмите кнопку отправки ➤</h4><p>Зелёная стрелочка справа от поля ввода</p></div></div>
+
+    <h2 style="font-size:1.3rem;font-weight:900;margin:32px 0 16px;">📞 Бесплатный звонок в WhatsApp</h2>
+    <div class="lesson-step"><div class="lesson-step-num">1</div><div class="lesson-step-body"><h4>Откройте чат с нужным человеком</h4><p>Нажмите на имя в списке</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">2</div><div class="lesson-step-body"><h4>Нажмите иконку телефона 📞</h4><p>В правом верхнем углу чата</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">3</div><div class="lesson-step-body"><h4>Ждите ответа</h4><p>Звонок бесплатный! Главное — чтобы у вас и у собеседника был интернет</p></div></div>
+
+    <div class="video-placeholder">
+      <div class="video-play">▶</div>
+      <strong>Видеоурок: WhatsApp для начинающих</strong>
+      <span style="font-size:0.9rem;color:#aaa;margin-top:4px;">10 минут</span>
+    </div>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" style="font-size:1.8rem;">✈️ Telegram</h2>
+
+    <div class="alert-blue">
+      <strong>ℹ️ Telegram vs WhatsApp:</strong> Telegram похож на WhatsApp, но в нём можно читать новости и полезные каналы. Каналы — это как газеты в телефоне!
+    </div>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon">📰</div>
+        <h3>Канал eGov.kz</h3>
+        <p>Официальные новости от электронного правительства</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏥</div>
+        <h3>Здоровье.kz</h3>
+        <p>Советы по здоровью и информация о лекарствах</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📺</div>
+        <h3>Хабар 24</h3>
+        <p>Новости Казахстана в реальном времени</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" style="font-size:1.8rem;">🎥 Видеозвонки</h2>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-icon">📹</div>
+        <h3>WhatsApp видеозвонок</h3>
+        <ol style="margin-top:12px;padding-left:20px;line-height:2;">
+          <li>Откройте чат</li>
+          <li>Нажмите иконку 📹 (камера)</li>
+          <li>Ждите ответа</li>
+          <li>Видите и слышите друг друга!</li>
+        </ol>
+      </div>
+      <div class="card">
+        <div class="card-icon">🖥</div>
+        <h3>Zoom — как войти</h3>
+        <ol style="margin-top:12px;padding-left:20px;line-height:2;">
+          <li>Получите ссылку от организатора</li>
+          <li>Нажмите на ссылку</li>
+          <li>Если нет Zoom — установите</li>
+          <li>Нажмите «Войти в конференцию»</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+    <div class="alert-red">
+      <p>⚠️ <strong>Правила безопасности в мессенджерах:</strong></p>
+      <ul style="margin-top:10px;padding-left:20px;line-height:2;">
+        <li>Не отправляйте фото документов незнакомым людям</li>
+        <li>Не переходите по подозрительным ссылкам</li>
+        <li>Не переводите деньги по просьбе незнакомцев</li>
+        <li>Если «ваш знакомый» просит деньги — позвоните ему и убедитесь лично</li>
+      </ul>
+    </div>
+
+    <div class="lesson-complete">
+      <h2>🎉 Отлично! Вы освоили мессенджеры</h2>
+      <p>Теперь вы можете бесплатно общаться с семьёй по всему миру!</p>
+      <button class="btn btn-secondary" onclick="showPage('security')">Следующий урок: Безопасность →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 6: SECURITY ===== -->
+<section class="page-section" id="page-security">
+  <div class="container">
+    <h1 class="section-title">🔒 Безопасность в интернете</h1>
+    <p class="section-sub">Защитите себя и свои деньги от мошенников</p>
+
+    <h2 class="section-title" style="font-size:1.8rem;margin-top:24px;">10 правил безопасности</h2>
+    <div class="security-grid">
+      <div class="security-can"><h4 style="margin-bottom:8px;">✅ МОЖНО</h4><p>Использовать официальные приложения из App Store и Google Play</p></div>
+      <div class="security-cant"><h4 style="margin-bottom:8px;">🚫 НЕЛЬЗЯ</h4><p>Называть код из SMS никому, даже «сотрудникам банка»</p></div>
+      <div class="security-can"><h4 style="margin-bottom:8px;">✅ МОЖНО</h4><p>Звонить на официальные номера банков из интернета</p></div>
+      <div class="security-cant"><h4 style="margin-bottom:8px;">🚫 НЕЛЬЗЯ</h4><p>Переходить по ссылкам из незнакомых SMS и сообщений</p></div>
+      <div class="security-can"><h4 style="margin-bottom:8px;">✅ МОЖНО</h4><p>Использовать длинные уникальные пароли для каждого сайта</p></div>
+      <div class="security-cant"><h4 style="margin-bottom:8px;">🚫 НЕЛЬЗЯ</h4><p>Сообщать пароль даже членам семьи (кроме случаев необходимости)</p></div>
+      <div class="security-can"><h4 style="margin-bottom:8px;">✅ МОЖНО</h4><p>Проверять адрес сайта в браузере (должен быть https://)</p></div>
+      <div class="security-cant"><h4 style="margin-bottom:8px;">🚫 НЕЛЬЗЯ</h4><p>Переводить деньги незнакомым людям за «призы» и «выплаты»</p></div>
+      <div class="security-can"><h4 style="margin-bottom:8px;">✅ МОЖНО</h4><p>Обновлять приложения — в обновлениях устраняются уязвимости</p></div>
+      <div class="security-cant"><h4 style="margin-bottom:8px;">🚫 НЕЛЬЗЯ</h4><p>Устанавливать приложения по просьбе незнакомцев</p></div>
+    </div>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" style="font-size:1.8rem;">🎣 Виды мошенничества</h2>
+    <div class="scheme-card">
+      <h3>🎣 Фишинг</h3>
+      <p><strong>Что это:</strong> Создают сайт-копию (например, поддельный Kaspi) и просят войти — так крадут логин и пароль.</p>
+      <p><strong>Как распознать:</strong> Проверяйте адрес сайта! Настоящий Kaspi: kaspi.kz. Фишинг: kaspi-kz.com, kaspii.kz.</p>
+      <p style="margin-top:8px;color:var(--green);font-weight:700;">✅ Что делать: Закройте сайт, не вводите данные. Позвоните в банк.</p>
+    </div>
+    <div class="scheme-card">
+      <h3>📞 Телефонное мошенничество</h3>
+      <p><strong>Что это:</strong> Звонит «сотрудник банка» или «полицейский» и говорит о блокировке карты.</p>
+      <p><strong>Пример:</strong> «Иванова? Это Kaspi Bank. Вашу карту пытаются взломать. Назовите код из SMS».</p>
+      <p style="margin-top:8px;color:var(--green);font-weight:700;">✅ Что делать: Положите трубку. Сами позвоните в банк по официальному номеру.</p>
+    </div>
+    <div class="scheme-card">
+      <h3>💰 Ложные выплаты от государства</h3>
+      <p><strong>Что это:</strong> «Вам положена выплата 150 000 тенге! Заплатите 2000 тенге налог для получения».</p>
+      <p style="margin-top:8px;color:var(--green);font-weight:700;">✅ Что делать: Никаких предоплат! Настоящие выплаты не требуют платы за «получение».</p>
+    </div>
+    <div class="scheme-card">
+      <h3>🎁 Фейковые призы</h3>
+      <p><strong>Что это:</strong> «Вы 1 000 000-й посетитель! Нажмите чтобы получить приз». Это реклама или вирус.</p>
+      <p style="margin-top:8px;color:var(--green);font-weight:700;">✅ Что делать: Закройте страницу. Никогда не нажимайте на такие сообщения.</p>
+    </div>
+    <div class="scheme-card">
+      <h3>👮 Мошенники под видом полиции</h3>
+      <p><strong>Что это:</strong> «Ваш сын попал в аварию. Чтобы избежать уголовного дела — переведите деньги».</p>
+      <p style="margin-top:8px;color:var(--green);font-weight:700;">✅ Что делать: Сразу позвоните сыну/дочери напрямую! Проверьте информацию.</p>
+    </div>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" style="font-size:1.8rem;">🔐 Генератор надёжного пароля</h2>
+    <div class="pwd-box">
+      <p style="margin-bottom:12px;">Нажмите кнопку — получите надёжный пароль, который легко запомнить!</p>
+      <div class="pwd-display" id="pwdDisplay">Нажмите кнопку ниже ↓</div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="generatePassword()">🔄 Создать пароль</button>
+        <button class="btn btn-secondary" onclick="copyPassword()">📋 Скопировать</button>
+      </div>
+      <div class="alert-green" style="margin-top:16px;">
+        <strong>✅ Совет:</strong> Запишите пароль в блокнот и храните его дома в безопасном месте.
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" style="font-size:1.8rem;">🚨 Что делать, если обманули?</h2>
+    <div class="lesson-step"><div class="lesson-step-num">1</div><div class="lesson-step-body"><h4>Не паникуйте!</h4><p>Сделайте глубокий вдох. Чем быстрее вы действуете — тем лучше.</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">2</div><div class="lesson-step-body"><h4>Позвоните в банк</h4><p>📞 Kaspi: <a href="tel:88007779977" style="color:var(--accent);font-weight:900;">8800 777-99-77</a> — заблокируйте карту</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">3</div><div class="lesson-step-body"><h4>Позвоните в полицию</h4><p>📞 <a href="tel:102" style="color:var(--accent);font-weight:900;">102</a> — сообщите о мошенничестве</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">4</div><div class="lesson-step-body"><h4>Сохраните доказательства</h4><p>Скриншоты переписки, номера телефонов мошенников</p></div></div>
+    <div class="lesson-step"><div class="lesson-step-num">5</div><div class="lesson-step-body"><h4>Расскажите близким</h4><p>Чтобы они тоже были осторожны и не попались на эту схему</p></div></div>
+
+    <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:var(--shadow);margin-top:24px;">
+      <h3 style="font-weight:900;margin-bottom:12px;">📞 Экстренные номера — сохраните!</h3>
+      <p>🏦 Kaspi Банк: <a href="tel:88007779977" style="color:var(--accent);font-weight:900;">8800 777-99-77</a></p>
+      <p>🚔 Полиция: <a href="tel:102" style="color:var(--accent);font-weight:900;">102</a></p>
+      <p>🏛 eGov горячая линия: <a href="tel:1414" style="color:var(--accent);font-weight:900;">1414</a></p>
+      <button class="btn btn-secondary" style="margin-top:16px;" onclick="alert('Скопируйте номера:\nKaspi: 8800 777-99-77\nПолиция: 102\neGov: 1414')">📋 Скопировать номера</button>
+    </div>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" style="font-size:1.8rem;">🧩 Тест: «Узнай мошенника»</h2>
+    <div id="quizSecurity"></div>
+    <button class="btn btn-primary" onclick="checkQuiz('security')" style="margin-top:16px;">Проверить ответы</button>
+    <div id="quizResultSecurity" style="margin-top:16px;font-weight:800;font-size:1.1rem;"></div>
+
+    <div class="lesson-complete">
+      <h2>🎉 Вы теперь знаете, как защититься!</h2>
+      <p>Помните главное правило: никому не называйте коды из SMS!</p>
+      <button class="btn btn-secondary" onclick="showPage('dictionary')">Перейти к Словарю →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 7: DICTIONARY ===== -->
+<section class="page-section" id="page-dictionary">
+  <div class="container">
+    <h1 class="section-title">📖 Словарь терминов</h1>
+    <p class="section-sub">Простые объяснения компьютерных слов</p>
+    <input class="dict-search" type="text" placeholder="🔍 Поиск по словарю..." oninput="filterDict(this.value)" id="dictSearch">
+    <div class="dict-alpha" id="dictAlpha"></div>
+    <div id="dictTerms"></div>
+  </div>
+</section>
+
+<!-- ===== PAGE 8: HELP ===== -->
+<section class="page-section" id="page-help">
+  <div class="container">
+    <h1 class="section-title">❓ Помощь и контакты</h1>
+    <p class="section-sub">Ответы на частые вопросы и способы связаться с нами</p>
+
+    <h2 class="section-title" style="font-size:1.8rem;margin-top:24px;">💬 Часто задаваемые вопросы</h2>
+    <div id="helpFaq"></div>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" style="font-size:1.8rem;">🎬 Видеоуроки</h2>
+    <div class="video-cards-grid" id="videoCards"></div>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" style="font-size:1.8rem;">📄 Скачать инструкции</h2>
+    <a class="download-btn" href="#"><div class="download-btn-icon">📋</div><div class="download-btn-text"><strong>Инструкция по eGov</strong><span>PDF, 2.4 МБ — шаги по получению госуслуг</span></div></a>
+    <a class="download-btn" href="#"><div class="download-btn-icon">💳</div><div class="download-btn-text"><strong>Инструкция по Kaspi</strong><span>PDF, 1.8 МБ — оплата и переводы</span></div></a>
+    <a class="download-btn" href="#"><div class="download-btn-icon">💬</div><div class="download-btn-text"><strong>WhatsApp для начинающих</strong><span>PDF, 1.2 МБ — звонки и сообщения</span></div></a>
+    <a class="download-btn" href="#"><div class="download-btn-icon">🔒</div><div class="download-btn-text"><strong>Основы безопасности</strong><span>PDF, 0.9 МБ — защита от мошенников</span></div></a>
+    <a class="download-btn" href="#"><div class="download-btn-icon">📖</div><div class="download-btn-text"><strong>Словарь терминов</strong><span>PDF, 1.1 МБ — все компьютерные слова</span></div></a>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" style="font-size:1.8rem;">✍️ Задать вопрос</h2>
+    <div style="background:var(--card);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);">
+      <div class="form-group"><label>Ваше имя</label><input type="text" id="formName" placeholder="Например: Айгуль Сейтқали"></div>
+      <div class="form-group"><label>Телефон</label><input type="tel" id="formPhone" placeholder="+7 (___) ___-__-__"></div>
+      <div class="form-group"><label>Ваш вопрос</label><textarea id="formQuestion" placeholder="Напишите свой вопрос подробно..."></textarea></div>
+      <button class="btn btn-primary" onclick="submitForm()">📨 Отправить вопрос</button>
+      <div class="form-success" id="formSuccess">
+        <div style="font-size:2.5rem;margin-bottom:12px;">✅</div>
+        Спасибо! Мы свяжемся с вами в течение 24 часов.
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title" style="font-size:1.8rem;">📞 Контакты</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px;">
+      <div class="contact-card">
+        <div style="font-size:2rem;margin-bottom:8px;">📞</div>
+        <div class="contact-phone"><a href="tel:88001234567">8800 123-45-67</a></div>
+        <p style="margin-top:8px;color:#888;">Горячая линия NaviG</p>
+        <p style="color:#888;font-size:0.95rem;">Пн-Пт: 9:00 – 18:00</p>
+      </div>
+      <div class="contact-card">
+        <div style="font-size:2rem;margin-bottom:8px;">💬</div>
+        <p style="font-weight:700;margin-bottom:8px;">WhatsApp поддержка</p>
+        <a class="btn btn-green" href="https://wa.me/77001234567">Написать в WhatsApp</a>
+      </div>
+      <div class="contact-card">
+        <div style="font-size:2rem;margin-bottom:8px;">📍</div>
+        <p style="font-weight:700;margin-bottom:8px;">Адрес</p>
+        <p style="color:#555;">г. Алматы, ул. Абая 44,<br>офис 201</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<button id="scrollTop" onclick="scrollToTop()" title="Наверх">↑</button>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>🧭 NaviG</h4>
+        <p style="color:#888;font-size:0.9rem;line-height:1.7;">Образовательный портал для пожилых людей Казахстана. Простой интернет для каждого!</p>
+      </div>
+      <div class="footer-col">
+        <h4>Разделы</h4>
+        <a onclick="showPage('home')">🏠 Главная</a>
+        <a onclick="showPage('internet')">🌐 Интернет</a>
+        <a onclick="showPage('egov')">🏛 Госуслуги</a>
+        <a onclick="showPage('kaspi')">💳 Kaspi</a>
+      </div>
+      <div class="footer-col">
+        <h4>Обучение</h4>
+        <a onclick="showPage('messengers')">📱 Мессенджеры</a>
+        <a onclick="showPage('security')">🔒 Безопасность</a>
+        <a onclick="showPage('dictionary')">📖 Словарь</a>
+        <a onclick="showPage('help')">❓ Помощь</a>
+      </div>
+      <div class="footer-col">
+        <h4>📞 Экстренные номера</h4>
+        <a href="tel:102">🚔 Полиция: 102</a>
+        <a href="tel:103">🚑 Скорая: 103</a>
+        <a href="tel:1414">🏛 eGov: 1414</a>
+        <a href="tel:88007779977">💳 Kaspi: 8800 777-99-77</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 NaviG — Интернет для каждого. Казахстан 🇰🇿
+    </div>
+  </div>
+</footer>
+
+<script>
+// ========== DATA ==========
+const quizData = {
+  internet: [
+    {q:"Что такое браузер?",opts:["Программа для просмотра сайтов","Вирус","Тип телефона","Социальная сеть"],a:0},
+    {q:"Как найти сайт в интернете?",opts:["Набрать адрес в адресной строке браузера","Позвонить другу","Написать SMS","Нажать на кнопку включения"],a:0},
+    {q:"Что означает знак @ в email?",opts:["Это разделитель имени и домена","Это пароль","Это номер телефона","Это код страны"],a:0},
+    {q:"Сколько стоит создать почту Gmail?",opts:["Бесплатно","1000 тенге","500 долларов","Нужно платить ежемесячно"],a:0},
+    {q:"Что такое Wi-Fi?",opts:["Беспроводной интернет","Тип компьютера","Название браузера","Модель телефона"],a:0}
+  ],
+  security: [
+    {q:"Вам позвонил «сотрудник банка» и просит назвать код из SMS. Что делать?",opts:["Положить трубку и позвонить в банк самому","Назвать код","Продиктовать все данные карты","Следовать всем инструкциям"],a:0},
+    {q:"Вам написали: «Вы выиграли 100 000 тенге! Переведите 1000 тенге налог». Это...",opts:["Мошенничество","Настоящий приз","Акция от банка","Государственная выплата"],a:0},
+    {q:"Что означает https:// в адресе сайта?",opts:["Сайт использует защищённое соединение","Сайт опасный","Сайт платный","Сайт государственный"],a:0},
+    {q:"Ваш «внук» написал в WhatsApp с незнакомого номера и просит деньги. Что делать?",opts:["Позвонить внуку напрямую для проверки","Сразу перевести деньги","Дать все данные карты","Игнорировать"],a:0},
+    {q:"Хороший пароль — это:",opts:["Длинная комбинация букв, цифр и знаков","Ваша дата рождения","Слово «пароль»","Ваше имя"],a:0},
+    {q:"Где лучше хранить пароли?",opts:["Записать в бумажный блокнот дома","Отправить себе в SMS","Написать на мониторе","Рассказать всем знакомым"],a:0}
+  ]
+};
+
+const egovServices = [
+  {icon:"📋",name:"Справка о несудимости",steps:["Войдите на egov.kz","Найдите услугу в поиске","Заполните заявку","Получите справку на email"]},
+  {icon:"🏠",name:"Адресная справка",steps:["Откройте egov.kz","Введите «адресная справка»","Укажите ИИН","Скачайте готовую справку"]},
+  {icon:"👴",name:"Пенсионные накопления",steps:["Войдите в личный кабинет","Раздел «Пенсионные выплаты»","Просмотрите баланс"]},
+  {icon:"🚗",name:"Регистрация авто",steps:["Подготовьте документы на авто","Оплатите госпошлину","Заполните заявку на egov.kz","Получите уведомление"]},
+  {icon:"📝",name:"Замена удостоверения",steps:["Загрузите фото","Заполните данные","Оплатите","Заберите в ЦОН"]},
+  {icon:"🏥",name:"Медицинский полис",steps:["Войдите на egov.kz","Поиск: «Медицинский полис»","Проверьте статус страховки"]},
+  {icon:"💰",name:"Социальные выплаты",steps:["Раздел «Социальные услуги»","Проверьте доступные выплаты","Подайте заявку онлайн"]},
+  {icon:"🎓",name:"Запись в школу",steps:["Раздел «Образование»","Выберите школу","Заполните заявление","Получите подтверждение"]}
+];
+
+const kaspiFunctions = [
+  {icon:"💳",name:"Баланс карты",desc:"Проверить остаток средств"},
+  {icon:"📤",name:"Перевод денег",desc:"Перевести близким мгновенно"},
+  {icon:"🧾",name:"Коммунальные",desc:"Свет, газ, вода, телефон"},
+  {icon:"📱",name:"Оплата телефона",desc:"Пополнить баланс за секунды"},
+  {icon:"🏦",name:"Вклад",desc:"Открыть и получать проценты"},
+  {icon:"🛒",name:"Kaspi Магазин",desc:"Покупки с доставкой"},
+  {icon:"🏠",name:"Ипотека",desc:"Платежи по ипотеке"},
+  {icon:"📊",name:"История операций",desc:"Все платежи за любой период"}
+];
+
+const egovFaqData = [
+  {q:"Забыл пароль от eGov. Что делать?",a:"Нажмите «Забыли пароль?» на странице входа. Введите номер телефона — придёт SMS с временным кодом. Затем установите новый пароль."},
+  {q:"Не приходит SMS-код при входе",a:"Проверьте: 1) Правильно ли введён номер телефона. 2) Есть ли баланс на телефоне. 3) Подождите 1 минуту и попробуйте снова. 4) Позвоните на 1414."},
+  {q:"Услуга недоступна без ЭЦП",a:"Некоторые услуги требуют ЭЦП. Получить её можно бесплатно в любом ЦОНе с удостоверением личности. Срок выдачи — 15 минут."},
+  {q:"Справка не приходит на email",a:"Проверьте папку «Спам». Убедитесь, что email указан правильно в профиле. Справка приходит в течение 1-3 рабочих дней."},
+  {q:"Как найти нужную услугу на eGov?",a:"В верхней части сайта есть строка поиска. Напишите название услуги по-русски или по-казахски — система найдёт нужную."},
+  {q:"Что делать, если сайт egov.kz не открывается?",a:"Проверьте интернет-соединение. Попробуйте другой браузер. Позвоните на горячую линию 1414."}
+];
+
+const helpFaqData = [
+  {q:"Что делать, если забыл пароль?",a:"На любом сайте нажмите «Забыли пароль?». Введите ваш email или телефон — придёт инструкция по восстановлению. Если это Kaspi — звоните 8800 777-99-77."},
+  {q:"Как понять, что сайт безопасный?",a:"Проверьте: в адресной строке должен быть замочек 🔒 и адрес должен начинаться с https:// (с буквой s). Сравните адрес с официальным — например, kaspi.kz, а не kaspii.kz."},
+  {q:"Интернет медленно работает — что делать?",a:"Попробуйте: 1) Выключите Wi-Fi роутер на 30 секунд и включите. 2) Закройте лишние приложения. 3) Перезагрузите телефон. Если не помогает — позвоните оператору."},
+  {q:"Как сохранить фото из WhatsApp?",a:"Откройте фото в WhatsApp. Нажмите на три точки ... в правом верхнем углу. Выберите «Сохранить в галерею». Фото появится в фотоальбоме."},
+  {q:"Как выйти из аккаунта?",a:"В большинстве приложений: зайдите в «Настройки» (шестерёнка ⚙️), прокрутите вниз до кнопки «Выйти» или «Выход» и нажмите."},
+  {q:"Телефон завис — что делать?",a:"Зажмите кнопку питания (включения) на 5-10 секунд. Телефон принудительно перезагрузится. Все данные сохранятся."},
+  {q:"Как удалить приложение?",a:"На Android: зажмите иконку приложения пальцем → появится меню → нажмите «Удалить». На iPhone: зажмите иконку → нажмите на крестик × → подтвердите удаление."},
+  {q:"Мне пришло странное сообщение — что делать?",a:"НЕ нажимайте ни на какие ссылки в этом сообщении! Не отвечайте на него. Заблокируйте отправителя. Расскажите детям или родственникам."},
+  {q:"Как проверить баланс интернета?",a:"У каждого оператора свой способ. Позвоните оператору или зайдите в их приложение. Activ: *150#, Beeline: *110#, Kcell: *123#."},
+  {q:"Как записаться к врачу через интернет?",a:"Зайдите на egov.kz → раздел «Здравоохранение» → «Запись к врачу». Войдите через свой аккаунт. Выберите поликлинику, врача и удобное время."},
+  {q:"Как включить/выключить Wi-Fi?",a:"Проведите пальцем сверху вниз по экрану — откроется панель быстрых настроек. Нажмите на иконку Wi-Fi 📶 чтобы включить или выключить."},
+  {q:"Фото не отправляется в WhatsApp",a:"Проверьте интернет-соединение. Убедитесь, что размер фото не слишком большой. Попробуйте отправить снова или перезапустите WhatsApp."},
+  {q:"Как увеличить шрифт на телефоне?",a:"Настройки → Дисплей → Размер шрифта. Передвиньте ползунок вправо для увеличения. На этом сайте используйте кнопки +A и −A в верхней части."},
+  {q:"Телефон быстро разряжается",a:"Уменьшите яркость экрана. Включите режим энергосбережения. Закройте лишние приложения. Отключите Bluetooth когда не нужен."},
+  {q:"Как сделать скриншот?",a:"Android: одновременно нажмите кнопку уменьшения громкости + кнопку питания. iPhone: нажмите кнопку боковую + кнопку Home (или боковую + громкость). Скриншот сохранится в галерее."}
+];
+
+const videos = [
+  {title:"Как пользоваться браузером",dur:"5 мин"},
+  {title:"Регистрация на eGov.kz",dur:"7 мин"},
+  {title:"Kaspi: первые шаги",dur:"8 мин"},
+  {title:"WhatsApp для начинающих",dur:"10 мин"},
+  {title:"Безопасность в интернете",dur:"6 мин"},
+  {title:"Как оплатить коммунальные",dur:"9 мин"},
+  {title:"Видеозвонки в WhatsApp",dur:"4 мин"},
+  {title:"Как получить справку онлайн",dur:"7 мин"}
+];
+
+const dictData = [
+  {term:"Браузер",icon:"🌐",def:"Программа для просмотра сайтов в интернете.",ex:"Chrome, Safari и Яндекс — это всё браузеры."},
+  {term:"Вирус",icon:"🦠",def:"Вредная программа, которая может испортить ваш телефон или украсть данные.",ex:"Вирус может прийти через подозрительные ссылки или приложения."},
+  {term:"Вкладка",icon:"📑",def:"Отдельная страница в браузере. Можно открыть несколько сайтов одновременно.",ex:"Открыл три вкладки: новости, почта и eGov."},
+  {term:"Вложение",icon:"📎",def:"Файл или фото, прикреплённые к письму или сообщению.",ex:"Она прислала вложение — фотографию внука."},
+  {term:"Гугл",icon:"🔍",def:"Самая популярная поисковая система в мире.",ex:"Я нашёл рецепт борща в Гугле."},
+  {term:"Домен",icon:"🏷",def:"Адрес сайта в интернете, например kaspi.kz или egov.kz.",ex:"Домен .kz означает, что сайт из Казахстана."},
+  {term:"Загрузка",icon:"⬇️",def:"Скачивание файла из интернета на ваш телефон или компьютер.",ex:"Загрузил приложение WhatsApp за 2 минуты."},
+  {term:"Интернет",icon:"🌍",def:"Глобальная сеть, соединяющая компьютеры по всему миру.",ex:"Через интернет можно общаться с людьми из разных стран."},
+  {term:"Иконка",icon:"🔷",def:"Маленькая картинка-кнопка на экране телефона или компьютера.",ex:"Нажмите на иконку с зелёным телефоном — это WhatsApp."},
+  {term:"Кэш",icon:"💾",def:"Временные данные, которые сохраняются для быстрой загрузки.",ex:"Очистите кэш, если приложение работает медленно."},
+  {term:"Логин",icon:"👤",def:"Ваше имя пользователя для входа на сайт.",ex:"Мой логин — это мой номер телефона или email."},
+  {term:"Личный кабинет",icon:"🏠",def:"Ваша личная страница на сайте после входа.",ex:"В личном кабинете eGov можно заказать любую справку."},
+  {term:"Ссылка",icon:"🔗",def:"Текст или кнопка, при нажатии на которую открывается другая страница.",ex:"Нажмите на ссылку — откроется сайт."},
+  {term:"Мессенджер",icon:"💬",def:"Приложение для отправки сообщений и звонков через интернет.",ex:"WhatsApp и Telegram — популярные мессенджеры."},
+  {term:"Мобильный интернет",icon:"📶",def:"Интернет через SIM-карту оператора связи (4G, 5G).",ex:"Включила мобильный интернет и проверила eGov."},
+  {term:"Пароль",icon:"🔑",def:"Секретный набор символов для входа в аккаунт.",ex:"Придумайте надёжный пароль: буквы + цифры + знаки."},
+  {term:"Поисковик",icon:"🔍",def:"Сервис для поиска информации в интернете.",ex:"Google и Яндекс — самые известные поисковики."},
+  {term:"Приложение",icon:"📱",def:"Программа для телефона или планшета.",ex:"Kaspi, WhatsApp — это приложения."},
+  {term:"Профиль",icon:"👤",def:"Ваша личная страница с именем и фото в соцсетях или приложениях.",ex:"Заполни профиль — добавь фото и имя."},
+  {term:"QR-код",icon:"📷",def:"Квадратный штрих-код, который можно отсканировать камерой.",ex:"Kaspi QR позволяет оплатить покупку без карты."},
+  {term:"Роутер",icon:"📡",def:"Устройство, которое раздаёт Wi-Fi в доме.",ex:"Выключи роутер на 30 секунд — интернет ускорится."},
+  {term:"Сайт",icon:"🌐",def:"Страница или набор страниц в интернете с информацией или услугами.",ex:"egov.kz — сайт государственных услуг Казахстана."},
+  {term:"Скриншот",icon:"📸",def:"Снимок экрана телефона или компьютера.",ex:"Сделай скриншот — одновременно нажми кнопку питания и уменьшение громкости."},
+  {term:"SMS-код",icon:"💬",def:"Одноразовый код, присылаемый по SMS для подтверждения.",ex:"Введите SMS-код для входа в eGov."},
+  {term:"Спам",icon:"🗑",def:"Нежелательные сообщения или письма рекламного характера.",ex:"Подозрительные письма попадают в папку «Спам»."},
+  {term:"Уведомление",icon:"🔔",def:"Сообщение-подсказка от приложения на экране телефона.",ex:"Пришло уведомление от Kaspi — оплата прошла."},
+  {term:"Учётная запись",icon:"🗝",def:"Ваш личный аккаунт с логином и паролем на каком-либо сервисе.",ex:"Создай учётную запись на Gmail."},
+  {term:"Фишинг",icon:"🎣",def:"Мошенничество: поддельный сайт для кражи ваших данных.",ex:"Проверяй адрес сайта — kaspi.kz, а не kaspi-kz.com."},
+  {term:"Хакер",icon:"💻",def:"Человек, который незаконно взламывает компьютеры и аккаунты.",ex:"Надёжный пароль защитит от хакеров."},
+  {term:"ЭЦП",icon:"✍️",def:"Электронная цифровая подпись — ваша подпись в цифровом виде.",ex:"ЭЦП нужна для некоторых услуг на eGov.kz. Получить можно в ЦОНе."},
+  {term:"Email",icon:"📧",def:"Электронная почта — адрес для получения писем в интернете.",ex:"Мой email: maria@gmail.com"},
+  {term:"Wi-Fi",icon:"📶",def:"Беспроводной интернет от роутера, без использования мобильного интернета.",ex:"Дома подключился к Wi-Fi и смотрел видео бесплатно."},
+  {term:"WhatsApp",icon:"💚",def:"Популярное приложение для бесплатных звонков и сообщений.",ex:"Позвонила дочке через WhatsApp — бесплатно!"},
+  {term:"YouTube",icon:"▶️",def:"Самый большой видеосайт в мире, где можно смотреть и публиковать видео.",ex:"На YouTube есть видеоуроки по eGov на казахском языке."},
+  {term:"Аккаунт",icon:"👤",def:"Ваша личная учётная запись на сайте или в приложении.",ex:"Создай аккаунт на Gmail — это бесплатно."},
+  {term:"Антивирус",icon:"🛡",def:"Программа для защиты телефона от вирусов и вредоносных программ.",ex:"Установите антивирус для защиты телефона."},
+  {term:"Bluetooth",icon:"🔵",def:"Технология беспроводной передачи данных на короткое расстояние.",ex:"Подключил наушники к телефону через Bluetooth."},
+  {term:"Галерея",icon:"🖼",def:"Приложение для хранения и просмотра фотографий на телефоне.",ex:"Все фото сохраняются в галерее телефона."},
+  {term:"Интерфейс",icon:"🖥",def:"Внешний вид программы или сайта — кнопки, меню, поля для ввода.",ex:"Интерфейс Kaspi очень удобный и понятный."},
+  {term:"Обновление",icon:"🔄",def:"Новая версия приложения с исправлениями и улучшениями.",ex:"Обновите приложение — в новой версии устранены ошибки."}
+];
+
+// ========== LANGUAGE ==========
+let currentLang = 'ru';
+function toggleLang() {
+  currentLang = currentLang === 'ru' ? 'kz' : 'ru';
+  document.getElementById('langBtn').textContent = currentLang === 'ru' ? 'ҚАЗ' : 'РУ';
+  document.querySelectorAll('[data-ru]').forEach(el => {
+    const val = el.getAttribute('data-' + currentLang);
+    if (val) el.textContent = val;
+  });
+}
+
+// ========== FONT SIZE ==========
+let fontSize = parseInt(localStorage.getItem('navig-font') || '20');
+function applyFont() {
+  document.documentElement.style.setProperty('--font-size', fontSize + 'px');
+  localStorage.setItem('navig-font', fontSize);
+}
+function changeFont(delta) {
+  fontSize = Math.max(16, Math.min(28, fontSize + delta));
+  applyFont();
+}
+applyFont();
+
+// ========== NAVIGATION ==========
+function showPage(id) {
+  document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById('page-' + id);
+  if (el) { el.classList.add('active'); window.scrollTo(0,0); }
+  document.querySelectorAll('nav a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('onclick') && a.getAttribute('onclick').includes("'"+id+"'"));
+  });
+  history.pushState(null, '', '#' + id);
+  // close mobile menu
+  document.getElementById('mainNav').classList.remove('open');
+}
+
+// ========== MOBILE MENU ==========
+function toggleMobileMenu() {
+  document.getElementById('mainNav').classList.toggle('open');
+}
+
+// ========== SCROLL TOP ==========
+const scrollBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  scrollBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+});
+function scrollToTop() { window.scrollTo({top:0,behavior:'smooth'}); }
+
+// ========== ACCORDION ==========
+function initAccordion(containerId, items) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = items.map((item, i) => `
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <span>${item.q}</span>
+        <span class="accordion-icon">+</span>
+      </div>
+      <div class="accordion-body">${item.a}</div>
+    </div>
+  `).join('');
+}
+function toggleAccordion(header) {
+  const body = header.nextElementSibling;
+  const icon = header.querySelector('.accordion-icon');
+  const isOpen = body.classList.contains('open');
+  // close all in same container
+  const parent = header.closest('div').parentElement;
+  parent.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
+  parent.querySelectorAll('.accordion-icon').forEach(ic => { ic.classList.remove('open'); ic.textContent = '+'; });
+  if (!isOpen) {
+    body.classList.add('open');
+    icon.classList.add('open');
+    icon.textContent = '+';
+  }
+}
+
+// ========== TABS ==========
+function switchTab(group, tab) {
+  document.querySelectorAll(`[id^="${group}-tab-"]`).forEach(el => el.classList.remove('active'));
+  document.querySelectorAll(`.tab-btn`).forEach(btn => btn.classList.remove('active'));
+  const target = document.getElementById(`${group}-tab-${tab}`);
+  if (target) target.classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ========== SERVICE CARDS ==========
+function initServiceCards() {
+  const c = document.getElementById('egovServices');
+  if (!c) return;
+  c.innerHTML = egovServices.map((s,i) => `
+    <div class="service-card">
+      <div class="service-card-header">
+        <div class="service-card-icon">${s.icon}</div>
+        <h3>${s.name}</h3>
+      </div>
+      <button class="btn btn-secondary" style="font-size:0.9rem;padding:10px 16px;min-height:44px;" onclick="toggleService(this)">Читать инструкцию ▾</button>
+      <div class="service-details">
+        <ol style="padding:16px 0 0 20px;line-height:2.2;color:#444;">
+          ${s.steps.map(step => `<li>${step}</li>`).join('')}
+        </ol>
+      </div>
+    </div>
+  `).join('');
+}
+function toggleService(btn) {
+  const details = btn.nextElementSibling;
+  const isOpen = details.classList.contains('open');
+  details.classList.toggle('open', !isOpen);
+  btn.textContent = isOpen ? 'Читать инструкцию ▾' : 'Скрыть ▲';
+}
+
+// ========== KASPI CARDS ==========
+function initKaspiCards() {
+  const c = document.getElementById('kaspiFunctions');
+  if (!c) return;
+  c.innerHTML = kaspiFunctions.map(f => `
+    <div class="card">
+      <div class="card-icon">${f.icon}</div>
+      <h3>${f.name}</h3>
+      <p>${f.desc}</p>
+    </div>
+  `).join('');
+}
+
+// ========== QUIZ ==========
+function initQuiz(id) {
+  const data = quizData[id];
+  const container = document.getElementById('quiz' + id.charAt(0).toUpperCase() + id.slice(1));
+  if (!container) return;
+  container.innerHTML = data.map((q, qi) => `
+    <div class="quiz-question" data-qi="${qi}" data-quiz="${id}">
+      <h3>${qi+1}. ${q.q}</h3>
+      <div class="quiz-options">
+        ${q.opts.map((opt, oi) => `
+          <button class="quiz-option" onclick="selectOption(this, ${qi}, ${oi}, '${id}')">${opt}</button>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+function selectOption(btn, qi, oi, id) {
+  const qBlock = btn.closest('.quiz-question');
+  qBlock.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  btn.dataset.selected = oi;
+  qBlock.dataset.selected = oi;
+}
+function checkQuiz(id) {
+  const data = quizData[id];
+  const resultEl = document.getElementById('quizResult' + id.charAt(0).toUpperCase() + id.slice(1));
+  let correct = 0;
+  document.querySelectorAll(`.quiz-question[data-quiz="${id}"]`).forEach((qBlock, qi) => {
+    const selected = parseInt(qBlock.dataset.selected);
+    const correctAns = data[qi].a;
+    qBlock.querySelectorAll('.quiz-option').forEach((btn, oi) => {
+      if (oi === correctAns) btn.classList.add('correct');
+      else if (oi === selected && selected !== correctAns) btn.classList.add('wrong');
+    });
+    if (selected === correctAns) correct++;
+  });
+  resultEl.innerHTML = `<div class="${correct >= Math.ceil(data.length*0.6) ? 'alert-green' : 'alert-red'}">
+    ${correct >= Math.ceil(data.length*0.6) ? '🎉' : '😔'} Правильных ответов: <strong>${correct} из ${data.length}</strong>. 
+    ${correct === data.length ? 'Отлично! Вы всё знаете!' : correct >= Math.ceil(data.length*0.6) ? 'Хороший результат! Почти всё верно.' : 'Прочитайте раздел ещё раз.'}
+  </div>`;
+}
+
+// ========== PASSWORD GENERATOR ==========
+const words = ['Алма','Гора','Река','Звезда','Луна','Цветок','Птица','Весна','Дерево','Облако'];
+const symbols = ['!','@','#','$','%'];
+function generatePassword() {
+  const w1 = words[Math.floor(Math.random()*words.length)];
+  const w2 = words[Math.floor(Math.random()*words.length)];
+  const num = Math.floor(Math.random()*9000)+1000;
+  const sym = symbols[Math.floor(Math.random()*symbols.length)];
+  document.getElementById('pwdDisplay').textContent = `${w1}${w2}${num}${sym}`;
+}
+function copyPassword() {
+  const pwd = document.getElementById('pwdDisplay').textContent;
+  if (navigator.clipboard) { navigator.clipboard.writeText(pwd); }
+  alert('Пароль скопирован: ' + pwd + '\n\nЗапишите его в блокнот!');
+}
+
+// ========== DICTIONARY ==========
+function initDictionary() {
+  const alphaDiv = document.getElementById('dictAlpha');
+  const termsDiv = document.getElementById('dictTerms');
+  if (!alphaDiv || !termsDiv) return;
+  const letters = [...new Set(dictData.map(d => d.term[0]))].sort();
+  alphaDiv.innerHTML = ['Все', ...letters].map(l => `<button onclick="filterDictLetter('${l}', this)">${l}</button>`).join('');
+  renderDict(dictData);
+}
+function renderDict(data) {
+  const termsDiv = document.getElementById('dictTerms');
+  termsDiv.innerHTML = data.length === 0 ? '<p style="color:#888;text-align:center;padding:32px;">Ничего не найдено</p>' :
+    data.map(d => `
+      <div class="dict-term" data-letter="${d.term[0]}">
+        <h3>${d.icon} ${d.term}</h3>
+        <p>${d.def}</p>
+        <p class="example">Пример: ${d.ex}</p>
+      </div>
+    `).join('');
+}
+function filterDict(query) {
+  const q = query.toLowerCase();
+  renderDict(dictData.filter(d => d.term.toLowerCase().includes(q) || d.def.toLowerCase().includes(q)));
+  document.querySelectorAll('.dict-alpha button').forEach(b => b.classList.remove('active'));
+}
+function filterDictLetter(letter, btn) {
+  document.getElementById('dictSearch').value = '';
+  document.querySelectorAll('.dict-alpha button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderDict(letter === 'Все' ? dictData : dictData.filter(d => d.term[0] === letter));
+}
+
+// ========== HELP FAQ ==========
+function initHelpFaq() {
+  initAccordion('helpFaq', helpFaqData);
+  initAccordion('egovFaq', egovFaqData);
+}
+
+// ========== VIDEO CARDS ==========
+function initVideoCards() {
+  const c = document.getElementById('videoCards');
+  if (!c) return;
+  c.innerHTML = videos.map(v => `
+    <div class="video-card">
+      <div class="video-card-thumb">▶</div>
+      <div class="video-card-body">
+        <h4>${v.title}</h4>
+        <span>⏱ ${v.dur}</span>
+        <button class="btn btn-primary" style="margin-top:12px;font-size:0.9rem;padding:10px 16px;min-height:44px;">▶ Смотреть</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ========== FORM ==========
+function submitForm() {
+  const name = document.getElementById('formName').value.trim();
+  const phone = document.getElementById('formPhone').value.trim();
+  const q = document.getElementById('formQuestion').value.trim();
+  if (!name || !phone || !q) { alert('Пожалуйста, заполните все поля!'); return; }
+  document.getElementById('formSuccess').style.display = 'block';
+  document.getElementById('formName').value = '';
+  document.getElementById('formPhone').value = '';
+  document.getElementById('formQuestion').value = '';
+  setTimeout(() => { document.getElementById('formSuccess').style.display = 'none'; }, 6000);
+}
+
+// ========== INIT ==========
+window.addEventListener('load', () => {
+  initQuiz('internet');
+  initQuiz('security');
+  initServiceCards();
+  initKaspiCards();
+  initDictionary();
+  initHelpFaq();
+  initVideoCards();
+
+  // Handle URL hash
+  const hash = location.hash.replace('#','');
+  const pages = ['home','internet','egov','kaspi','messengers','security','dictionary','help'];
+  if (pages.includes(hash)) showPage(hash);
+});
+</script>
+</body>
+</html>
